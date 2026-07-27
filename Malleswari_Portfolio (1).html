@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malleswari D — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F1B2D;
+    --panel:#152742;
+    --panel-2:#1B3252;
+    --border:#26405F;
+    --amber:#E8A33D;
+    --amber-dim:#8a672c;
+    --teal:#5FB3A3;
+    --text:#EDEEF2;
+    --muted:#8FA0B8;
+    --muted-2:#5E7089;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+  }
+  ::selection{background:var(--amber);color:#14202f;}
+  a{color:inherit;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;margin:0;}
+
+  /* background grid texture */
+  .grid-bg{
+    position:fixed;inset:0;z-index:-1;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.14;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+
+  .wrap{max-width:1040px;margin:0 auto;padding:0 28px;}
+
+  /* ---- NAV ---- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(15,27,45,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;}
+  .brand{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;letter-spacing:0.02em;}
+  .brand span{color:var(--amber);}
+  .navlinks{display:flex;gap:26px;font-size:14px;color:var(--muted);}
+  .navlinks a{text-decoration:none;transition:color .15s;}
+  .navlinks a:hover{color:var(--text);}
+  .navlinks a:focus-visible, a:focus-visible, button:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px;}
+
+  /* ---- HERO ---- */
+  header.hero{padding:76px 0 56px;position:relative;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;
+    color:var(--teal);text-transform:uppercase;margin-bottom:22px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px var(--teal);animation:pulse 2.2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+  h1.name{font-size:clamp(38px,6vw,64px);font-weight:700;line-height:1.03;letter-spacing:-0.01em;}
+  .role-line{font-size:clamp(16px,2.4vw,20px);color:var(--muted);margin-top:18px;max-width:640px;font-weight:400;}
+  .role-line strong{color:var(--text);font-weight:600;}
+
+  .hero-stats{display:flex;gap:0;margin-top:44px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .hstat{flex:1;padding:18px 20px;border-right:1px solid var(--border);}
+  .hstat:last-child{border-right:none;}
+  .hstat .num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:600;color:var(--amber);}
+  .hstat .lbl{font-size:12px;color:var(--muted-2);margin-top:4px;letter-spacing:0.02em;}
+
+  .hero-actions{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;}
+  .btn{
+    font-family:'Inter',sans-serif;font-size:14px;font-weight:600;
+    padding:11px 20px;border-radius:8px;text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--border);transition:all .15s;
+  }
+  .btn-primary{background:var(--amber);color:#14202f;border-color:var(--amber);}
+  .btn-primary:hover{background:#f0ae4d;}
+  .btn-ghost{color:var(--text);}
+  .btn-ghost:hover{border-color:var(--muted);}
+
+  /* pipeline signature motif */
+  .pipeline{
+    display:flex;align-items:center;gap:0;margin:52px 0 0;
+    overflow-x:auto;padding-bottom:4px;
+  }
+  .stage{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.05em;
+    color:var(--muted);border:1px solid var(--border);border-radius:20px;
+    padding:6px 14px;white-space:nowrap;background:var(--panel);
+  }
+  .arrow{color:var(--muted-2);padding:0 10px;font-size:13px;white-space:nowrap;}
+
+  section{padding:64px 0;border-top:1px solid var(--border);}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:14px;}
+  .section-head h2{font-size:26px;}
+  .section-num{font-family:'JetBrains Mono',monospace;color:var(--muted-2);font-size:13px;}
+
+  /* ---- FILTER BAR ---- */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px;}
+  .filter-btn{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;
+    background:var(--panel);border:1px solid var(--border);color:var(--muted);
+    padding:8px 15px;border-radius:20px;cursor:pointer;transition:all .15s;
+  }
+  .filter-btn:hover{color:var(--text);border-color:var(--muted);}
+  .filter-btn.active{background:var(--amber);color:#14202f;border-color:var(--amber);font-weight:600;}
+
+  /* ---- PROJECT CARDS ---- */
+  .cards{display:grid;grid-template-columns:1fr;gap:18px;}
+  .card{
+    background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+    padding:26px 26px 24px;transition:border-color .2s, transform .2s;
+  }
+  .card:hover{border-color:var(--amber-dim);}
+  .card.hidden{display:none;}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+  .card-title-row{display:flex;align-items:center;gap:10px;}
+  .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+  .status-dot.complete{background:var(--teal);box-shadow:0 0 6px var(--teal);}
+  .status-dot.building{background:var(--amber);box-shadow:0 0 6px var(--amber);}
+  .card h3{font-size:19px;font-weight:600;}
+  .card .stack{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-2);margin-top:6px;}
+  .metric-badge{
+    text-align:right;flex-shrink:0;
+  }
+  .metric-badge .n{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;color:var(--amber);line-height:1;}
+  .metric-badge .l{font-size:10.5px;color:var(--muted-2);margin-top:3px;letter-spacing:0.02em;text-transform:uppercase;}
+  .card ul{margin:18px 0 0;padding-left:18px;color:var(--muted);font-size:14.5px;}
+  .card li{margin-bottom:6px;}
+  .card li::marker{color:var(--amber-dim);}
+  .card-tags{display:flex;gap:6px;margin-top:18px;flex-wrap:wrap;}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;background:var(--panel-2);color:var(--muted);padding:4px 9px;border-radius:5px;}
+  .card-links{margin-top:16px;display:flex;gap:16px;}
+  .card-links a{font-size:13px;color:var(--teal);text-decoration:none;font-weight:500;}
+  .card-links a:hover{text-decoration:underline;}
+
+  /* ---- SKILLS ---- */
+  .skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;}
+  .skill-group h4{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;}
+  .skill-group p{color:var(--muted);font-size:14px;margin:0;}
+
+  /* ---- EXPERIENCE ---- */
+  .exp-row{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;}
+  .exp-row h3{font-size:18px;}
+  .exp-date{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted-2);}
+  .exp-list{margin:14px 0 0;padding-left:18px;color:var(--muted);font-size:14.5px;}
+  .exp-list li{margin-bottom:7px;}
+  .exp-list li::marker{color:var(--amber-dim);}
+
+  /* ---- CERTS & EDU ---- */
+  .two-col{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;}
+  .cert-list{list-style:none;margin:0;padding:0;}
+  .cert-list li{padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--muted);}
+  .cert-list li:last-child{border-bottom:none;}
+  .cert-list strong{color:var(--text);font-weight:500;}
+  .edu-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:22px;}
+  .edu-card h4{font-family:'Space Grotesk',sans-serif;font-size:16px;margin-bottom:6px;}
+  .edu-card .school{color:var(--muted);font-size:14px;}
+  .edu-card .meta{margin-top:14px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted-2);}
+
+  /* ---- FOOTER / CONTACT ---- */
+  footer{padding:60px 0 50px;}
+  .contact-box{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:44px 36px;text-align:center;
+  }
+  .contact-box h2{font-size:28px;margin-bottom:12px;}
+  .contact-box p{color:var(--muted);max-width:440px;margin:0 auto 26px;}
+  .contact-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .foot-note{text-align:center;color:var(--muted-2);font-size:12.5px;margin-top:40px;font-family:'JetBrains Mono',monospace;}
+
+  @media (max-width:720px){
+    .navlinks{display:none;}
+    .hero-stats{flex-wrap:wrap;}
+    .hstat{flex:1 1 50%;border-bottom:1px solid var(--border);}
+    .two-col{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">MALLESWARI <span>D</span></div>
+    <div class="navlinks">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> OPEN TO WORK · CHENNAI, IN</div>
+    <h1 class="name">Malleswari D</h1>
+    <p class="role-line">Computer Science graduate with hands-on experience building AI-powered applications, machine learning pipelines, and full-stack systems using Python, FastAPI, React, and .NET. Skilled in LLM integration, RESTful API development, data workflows, and cloud-based CI/CD. Developed end-to-end projects involving AI agents, machine learning, and scalable application architectures, with practical experience in Azure, Docker, Kubernetes, and OpenShift.</p>
+
+    <div class="hero-stats">
+      <div class="hstat"><div class="num">4</div><div class="lbl">END-TO-END SHIPPED PROJECTS</div></div>
+      <div class="hstat"><div class="num">7.1</div><div class="lbl">CGPA · B.SC CS, 2026</div></div>
+      <div class="hstat"><div class="num">4</div><div class="lbl">CERTIFICATIONS</div></div>
+    </div>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#work">View projects ↓</a>
+      <a class="btn btn-ghost" href="mailto:malleswarimadhu057@gmail.com">Email me</a>
+      <a class="btn btn-ghost" href="https://github.com/malleswari123321" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/malleswari-d-5096682b1/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+
+    <div class="pipeline" aria-hidden="true">
+      <div class="stage">RAW DATA</div><div class="arrow">→</div>
+      <div class="stage">FEATURES</div><div class="arrow">→</div>
+      <div class="stage">MODEL</div><div class="arrow">→</div>
+      <div class="stage">DECISION</div><div class="arrow">→</div>
+      <div class="stage">EXPLAINED OUTPUT</div>
+    </div>
+  </div>
+</header>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Projects</h2>
+      <span class="section-num mono">filter by track</span>
+    </div>
+
+    <div class="filters" role="tablist" aria-label="Filter projects by track">
+      <button class="filter-btn active" data-filter="all">ALL</button>
+      <button class="filter-btn" data-filter="fullstack">FULL-STACK / SWE</button>
+      <button class="filter-btn" data-filter="data-ml">DATA / ML</button>
+      <button class="filter-btn" data-filter="analyst">BUSINESS ANALYST</button>
+    </div>
+
+    <div class="cards" id="cardGrid">
+
+      <div class="card" data-tracks="data-ml analyst">
+        <div class="card-top">
+          <div>
+            <div class="card-title-row"><span class="status-dot complete"></span><h3>AI-Powered CRISPR Gene Target Safety Predictor</h3></div>
+            <div class="stack">Python · Scikit-learn · Random Forest · Azure ML</div>
+          </div>
+          <div class="metric-badge"><div class="n">91.5%</div><div class="l">accuracy</div></div>
+        </div>
+        <ul>
+          <li>Engineered 10+ biological features (GC/AT content, mutation position, PAM presence, k-mer patterns) from raw DNA/RNA sequence data to classify CRISPR gene-editing targets as safe or risky.</li>
+          <li>Validated with a Random Forest model — 0.91 F1-score across both classes, precision/recall 0.90–0.93 — via train/test split and confusion-matrix evaluation.</li>
+          <li>Produced explainable outputs (feature-importance plots, decision-tree diagrams, confidence heatmaps) so non-technical reviewers can trust the model's calls.</li>
+          <li>Designed for Azure ML execution, enabling reproducible, cloud-scale runs beyond a local notebook.</li>
+        </ul>
+        <div class="card-tags"><span class="tag">group project</span><span class="tag">classification</span><span class="tag">explainability</span></div>
+      </div>
+
+      <div class="card" data-tracks="fullstack">
+        <div class="card-top">
+          <div>
+            <div class="card-title-row"><span class="status-dot complete"></span><h3>Cloud Full-Stack Application with AI Data Pipeline</h3></div>
+            <div class="stack">React 18 · .NET 8 · ASP.NET Core · Azure DevOps</div>
+          </div>
+          <div class="metric-badge"><div class="n">CI/CD</div><div class="l">automated</div></div>
+        </div>
+        <ul>
+          <li>Built the full data path: user input → AI content generation (OpenAI API) → ETL transformation → persistent SQL storage → frontend display.</li>
+          <li>Designed a REST API layer with ASP.NET Core, Entity Framework Core, request-validation middleware, and dependency injection for testable architecture.</li>
+          <li>Set up an Azure DevOps CI/CD pipeline with automated build/test/deploy stages plus monitoring and error alerting.</li>
+        </ul>
+        <div class="card-tags"><span class="tag">.NET 8</span><span class="tag">Azure DevOps</span><span class="tag">REST API</span></div>
+      </div>
+
+      <div class="card" data-tracks="fullstack data-ml analyst">
+        <div class="card-top">
+          <div>
+            <div class="card-title-row"><span class="status-dot complete"></span><h3>ResumeMatch AI — ATS Resume Screening Platform</h3></div>
+            <div class="stack">Python · FastAPI · React · Sentence Transformers · SQL</div>
+          </div>
+          <div class="metric-badge"><div class="n">NLP</div><div class="l">semantic match</div></div>
+        </div>
+        <ul>
+          <li>Built a full-stack ATS platform that scores resumes against job descriptions using keyword and semantic (NLP) matching.</li>
+          <li>Added a skill-gap analysis feature that flags matched, missing, and required skills — a direct decision-support tool, not just a score.</li>
+          <li>Shipped the FastAPI backend and a React dashboard for ATS scoring and match visualization.</li>
+        </ul>
+        <div class="card-tags"><span class="tag">Sentence Transformers</span><span class="tag">FastAPI</span><span class="tag">dashboard</span></div>
+        <div class="card-links"><a href="https://github.com/malleswari123321/ResumeMatch-AI" target="_blank" rel="noopener">View on GitHub ↗</a></div>
+      </div>
+
+      <div class="card" data-tracks="fullstack data-ml">
+        <div class="card-top">
+          <div>
+            <div class="card-title-row"><span class="status-dot complete"></span><h3>Autonomous AI Document Generation Agent</h3></div>
+            <div class="stack">Python · FastAPI · Gemini AI · python-docx</div>
+          </div>
+          <div class="metric-badge"><div class="n">Plan→Exec</div><div class="l">self-checking</div></div>
+        </div>
+        <ul>
+          <li>Built an autonomous agent that plans (auto-generates a TODO list), executes, and self-checks before producing structured business documents.</li>
+          <li>Integrated Gemini AI to generate proposals, project plans, and reports; automated .docx creation with python-docx.</li>
+          <li>Added retry/fallback logic and API validation — verified working end-to-end, including an offline fallback path.</li>
+        </ul>
+        <div class="card-tags"><span class="tag">agentic AI</span><span class="tag">Gemini API</span><span class="tag">python-docx</span></div>
+        <div class="card-links"><a href="https://github.com/malleswari123321/autonomous-ai-document-agent" target="_blank" rel="noopener">View on GitHub ↗</a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Skills</h2>
+      <span class="section-num mono">stack</span>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <p>Python, JavaScript (ES2023), TypeScript, SQL, C++, HTML/CSS</p>
+      </div>
+      <div class="skill-group">
+        <h4>Frontend</h4>
+        <p>React 18, Hooks, Context API, REST integration, responsive UI</p>
+      </div>
+      <div class="skill-group">
+        <h4>Backend / APIs</h4>
+        <p>FastAPI, .NET 8, ASP.NET Core, Entity Framework Core, REST API design</p>
+      </div>
+      <div class="skill-group">
+        <h4>AI / ML</h4>
+        <p>Scikit-learn, OpenAI API, Gemini API, Azure AI, NLP, feature engineering</p>
+      </div>
+      <div class="skill-group">
+        <h4>Cloud & DevOps</h4>
+        <p>Microsoft Azure (ML, DevOps, CI/CD), Docker, Kubernetes, OpenShift</p>
+      </div>
+      <div class="skill-group">
+        <h4>Data & Analytics</h4>
+        <p>SQL databases, ETL pipeline design, data modelling, Power BI</p>
+      </div>
+      <div class="skill-group">
+        <h4>Networking</h4>
+        <p>GNS3, OSPF, Cisco IOS, Cisco ASA, network segmentation</p>
+      </div>
+      <div class="skill-group">
+        <h4>Tools</h4>
+        <p>Git, GitHub, Azure DevOps, UiPath, VS Code, Agile/Scrum</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Experience</h2>
+      <span class="section-num mono">professional</span>
+    </div>
+    <div class="exp-row">
+      <h3>Frontend Developer Intern — Purple, Chennai</h3>
+      <span class="exp-date">Aug 2025 – Oct 2025</span>
+    </div>
+    <ul class="exp-list">
+      <li>Engineered responsive, reusable frontend components using React 18, Hooks, Context API, and modern JavaScript (ES6+).</li>
+      <li>Integrated the OpenAI API into a React 18 + .NET 8 full-stack application to deliver AI-powered, real-time functionality.</li>
+      <li>Collaborated with backend developers on REST API integration and application state management for smooth end-to-end UX.</li>
+      <li>Optimized frontend performance and followed component-based architecture and modern React development practices.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Credentials</h2>
+      <span class="section-num mono">certifications & education</span>
+    </div>
+    <div class="two-col">
+      <ul class="cert-list">
+        <li><strong>Microsoft Azure for Data Engineering</strong> — cloud data pipelines, scalable data infrastructure (Coursera)</li>
+        <li><strong>Power BI – Visualize to Realize</strong> — interactive dashboards with charts, KPIs, and filters</li>
+        <li><strong>Containers with Docker, Kubernetes & OpenShift</strong> — containerized deployment</li>
+        <li><strong>Applied Machine Learning in Python</strong> — supervised/unsupervised learning, model evaluation (Coursera)</li>
+        <li><strong>Robotics Process Automation Level 1</strong></li>
+      </ul>
+      <div class="edu-card">
+        <h4>B.Sc. Computer Science</h4>
+        <div class="school">University of Madras, Chennai, Tamil Nadu</div>
+        <div class="meta"><span>2023 – 2026</span><span>CGPA 7.1</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <h2>Let's talk</h2>
+      <p>Open to full-stack, data/ML, and network engineering roles. Reach out directly — I reply fast.</p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:malleswarimadhu057@gmail.com">malleswarimadhu057@gmail.com</a>
+        <a class="btn btn-ghost" href="https://github.com/malleswari123321" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/malleswari-d-5096682b1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="foot-note">BUILT BY MALLESWARI D · CHENNAI · 2026</div>
+  </div>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('#cardGrid .card');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(card => {
+        const tracks = card.dataset.tracks.split(' ');
+        card.classList.toggle('hidden', f !== 'all' && !tracks.includes(f));
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
